@@ -26,7 +26,6 @@ class ProductController extends VoyagerBaseController
     //      Browse our Data Type (B)READ
     //
     //****************************************
-
     public function index(Request $request)
     {
         // dd('this is index method');

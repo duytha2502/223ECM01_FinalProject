@@ -29,16 +29,16 @@ class OrderController extends Controller
 
     public function markDelivered(SubOrder $suborder)
     {
-        $suborder->status = 'completed';
+        $suborder->status = 'processing';
         $suborder->save();
 
         //check if all suborders complete
-        $pendingSubOrders = $suborder->order->subOrders()->where('status','!=', 'completed')->count();
+        $pendingSubOrders = $suborder->order->subOrders()->where('status','!=', 'processing')->count();
 
         if($pendingSubOrders == 0) {
-            $suborder->order()->update(['status'=>'completed']);
+            $suborder->order()->update(['status'=>'processing']);
         }
 
-        return redirect('/seller/orders')->withMessage('Order marked complete');
+        return redirect('/seller/orders')->withMessage('Order marked processing');
     }
 }

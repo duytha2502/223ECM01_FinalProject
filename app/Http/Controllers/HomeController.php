@@ -6,6 +6,7 @@ use App\Product;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -26,9 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $products = Product::with('shop.owner')->take(30)->get();
 
         $categories = Category::with('children.children')->whereNull('parent_id')->get();
+        
+        $products = Product::paginate(12);
 
         return view('home', ['allProducts' => $products,'categories'=>$categories]);
     }

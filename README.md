@@ -21,6 +21,8 @@ And Migrate with
 
  `php artisan storage:link`
 
+ Install the composer socialite
+`composer require laravel/socialite`
 
 Login Credentials for admin panel
 

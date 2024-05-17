@@ -2332,6 +2332,7 @@ a.banner-book-style-btn:hover {
     display: block;
     float: left;
     width: 20%;
+    padding-top: 15px;
 }
 .menu-slider-wrapper {
     float: left;
@@ -2342,23 +2343,29 @@ a.banner-book-style-btn:hover {
     box-shadow: 0 0 15px 0.08px rgba(0, 0, 0, 0.15);
     padding: 40px 0px;
 }
-.category-heading > h3 {
+.category-heading > a {
     background-color: #2b2b2b;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;
     margin: 0;
-    padding: 16px 60px 15px;
+    padding: 16px 77px 15px;
     position: relative;
     text-transform: uppercase;
 }
-.category-heading > h3 i {
+
+.category-heading >a:hover {
+    background-color: rgb(161, 161, 161);
+    color: black;
+}
+
+/* .category-heading > a i {
     color: #ffffff;
     font-size: 30px;
     position: absolute;
     top: 9px;
     right: 50px;
-}
+} */
 .category-menu-list > ul > li {
   position: relative;
 }
@@ -2432,10 +2439,9 @@ a.banner-book-style-btn:hover {
 .category-common3::before {
     background: #c6c6c6 none repeat scroll 0 0;
     content: "";
-    height: 240px;
+    height: 40px;
     left: 0;
     position: absolute;
-    top: 30px;
     width: 1px;
 }
 .category-common4::before {
@@ -2447,10 +2453,17 @@ a.banner-book-style-btn:hover {
     top: 30px;
     width: 1px;
 }
-.category-common4:first-child::before,
+
+/* .category-common4:first-child::before,
 .category-common3:first-child::before {
     display: none;
 }
+
+.category-common4:nth-child(4)::before,
+.category-common3:nth-child(4):before {
+    display: none;
+} */
+
 .category-menu-list ul li .category-common h4,
 .category-menu-list ul li .category-common2 h4 {
     font-size: 14px;
@@ -2572,6 +2585,7 @@ a.banner-book-style-btn:hover {
     display: inline-block;
     position: relative;
     margin: 0 45px;
+    left: -30%;
 }
 .menu-style-3 nav > ul > li > a {
     color: #f3f3f3;
@@ -6074,6 +6088,16 @@ a.icon-cart-furniture.food-cart span {
     text-align: center;
     width: inherit;
 }
+
+.pagination-all-products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
 .pagination-style .owl-dot {
     background: #f1f1f1 none repeat scroll 0 0;
     border-radius: 50px;
@@ -6722,7 +6746,7 @@ thead {
     color: #555;
     font-size: 13px;
     height: 42px;
-    width: 120px;
+    width: 50%;
 }
 .coupon2 input {
     width: inherit;
@@ -6752,7 +6776,7 @@ thead {
     margin-top: 30px;
 }
 .coupon {
-    float: left;
+    float: right;
 }
 .coupon2 {
     float: right;
@@ -7340,20 +7364,56 @@ h5.panel-title {
     font-size: 18px;
     font-weight: 600;
     margin: 0;
+    width: 130%;
 }
 .shop-found > p span {
     color: #050035;
 }
 .shop-selector {
-    margin-left: 63px;
+    margin-left: 80px;
     margin-top: -3px;
+    width: 80%;
 }
+
+.shop-selector-allproducts {
+    margin-left: -100px;
+    margin-top: -3px;
+    width: 30%;
+    position: absolute;
+    right: 15%;
+}
+
 .shop-selector label {
     color: #6c6c6c;
     font-size: 18px;
     font-weight: 600;
     text-transform: capitalize;
 }
+
+.shop-seclector-label {
+    float: left;
+}
+
+.shop-selector-sort {
+    float: right;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 83%;
+}
+
+.shop-selector-sort button {
+    border-width: 1px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease 0s;
+}
+
+.shop-selector-sort button:hover {
+    background-color: #050035;
+    color: white;
+}
+
 .shop-selector select {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -7381,19 +7441,26 @@ h5.panel-title {
 .shop-tab a:hover {
     color: #050035;
 }
+
+.pagination-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .pagination-style ul li {
-    display: inline-block;
+    /* display: inline-block; */
     margin: 0 3px;
 }
 .pagination-style ul li a {
     background-color: #f6f6f6;
     color: #3f3f3f;
-    display: inline-block;
-    font-size: 13px;
+    /* display: inline-block; */
+    /* font-size: 13px; */
     font-weight: 500;
-    height: 40px;
-    line-height: 41px;
-    width: 40px;
+    /* height: 40px; */
+    /* line-height: 41px; */
+    /* width: 40px; */
 }
 .pagination-style ul li.active a,
 .pagination-style ul li a:hover {

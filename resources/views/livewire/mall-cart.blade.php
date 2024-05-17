@@ -1,4 +1,3 @@
-@section('content')
 <div>
     {{-- In work, do what you enjoy. --}}
 
@@ -13,7 +12,7 @@
                             <thead>
                                 <tr>
                                     <th>remove</th>
-                                    <th>images</th>
+                                    <th>Image</th>
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
@@ -27,14 +26,13 @@
                                     <td class="product-remove">
                                         <a href="{{ route('cart.destroy', $item['id']) }}"><i
                                                 class="pe-7s-close"></i></a>
-
                                     </td>
 
-                                    <td class="product-thumbnail">
-                                        <a href="#">
-                                            <img src="" alt="">
-                                        </a>
-                                    </td>
+                                    <td class="product-thumbnail"><a href="#"></a>
+                                        <img style="width: 100%" src="{{ $item['associatedModel']['cover_img'] }}" alt="">
+                                        <img style="width: 100%" src="{{ url('storage/'.$item['associatedModel']['cover_img']) }}" alt="">
+                                    </td> 
+                                    
                                     <td class="product-name"><a href="#">{{ $item['name'] }} </a></td>
                                     <td class="product-price-cart"><span
                                             class="amount">${{Cart::session(auth()->id())->get($item['id'])->getPriceSum()}}</span>
@@ -47,7 +45,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="coupon-all">
                                 <div class="coupon">
@@ -56,11 +54,13 @@
                                             placeholder="Coupon code" type="text" required>
                                         <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                     </form>
+                                    {{-- <form action="{{route('cart.clearCoupon')}}" method='get'>
+                                    <input class="button" name="apply_coupon" value="Clear coupon" type="submit">
+                                    </form> --}}
                                 </div>
-
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
@@ -77,8 +77,5 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
-@endsection
+

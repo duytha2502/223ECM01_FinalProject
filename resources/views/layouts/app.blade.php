@@ -19,14 +19,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/android-icon-96x96.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                {{ config('app.name', 'Ezone') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,19 +42,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
-                        @can('seller')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('shops.create') }}">Open Your Shop</a>
-                            </li>
-                        @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                          <li class="nav-item mr-2">
-                            <a class="nav-link p-0 m-0" href="{{ route('cart.index') }}">
+                            <!-- <a class="nav-link p-0 m-0" href="{{ route('cart.index') }}">
                                 <i class="fas fa-cart-arrow-down text-success fa-2x"></i>
                                     <div class="badge badge-danger">
                                         @auth
@@ -56,20 +57,15 @@
                                         0
                                         @endauth
                                     </div>
-                            </a>
+                            </a> -->
                         </li>
 
 
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            </li> -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -82,7 +78,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -93,25 +88,26 @@
                 </div>
             </div>
         </nav>
+        <br>
+            {{-- display success message --}}
+            @if(session()->has('message'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{session('message')}}
+                </div>
+            @endif
 
-        {{-- display success message --}}
-        @if(session()->has('message'))
-            <div class="alert alert-success text-center" role="alert">
-               {{session('message')}}
+            {{-- display error message --}}
+
+            @if(session()->has('error'))
+            <div class="alert alert-danger text-center" role="alert">
+                {{session('error')}}
             </div>
-        @endif
+            @endif
 
-        {{-- display error message --}}
-
-        @if(session()->has('error'))
-        <div class="alert alert-danger text-center" role="alert">
-            {{session('error')}}
+            <main class="py-4 container">
+                @yield('content')
+            </main>
         </div>
-        @endif
-
-        <main class="py-4 container">
-            @yield('content')
-        </main>
     </div>
 </body>
 </html>

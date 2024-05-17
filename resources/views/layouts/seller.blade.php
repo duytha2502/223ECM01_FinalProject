@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="/js/app.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,14 +20,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/android-icon-96x96.png">
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -38,14 +41,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
 
-                        @can('customer')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('shops.create') }}">Open Your Shop</a>
-                            </li>
-                        @endcan
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -89,7 +85,7 @@
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
+                                    >
                                     @csrf
                                 </form>
                             </div>
@@ -114,19 +110,18 @@
             {{session('error')}}
         </div>
         @endif
-
+        <br>
         <main class="py-4 container-fluid">
             <div class="row">
                 <div class="col-3">
-
                     <div class="list-group">
                         <a href="/seller" class="list-group-item list-group-item-action active">Dashboard</a>
+                        @if (auth()->guard('web')->user() && auth()->guard('web')->user()->role_id == 3)
                         <a href=" {{route('seller.orders.index')}} " class="list-group-item list-group-item-action">Orders</a>
                         <a href=" {{url('/admin/shops')}} " class="list-group-item list-group-item-action">Go to Shop</a>
+                        @endif
                     </div>
-
                 </div>
-
                 <div class="col-9">
                     @yield('content')
                 </div>

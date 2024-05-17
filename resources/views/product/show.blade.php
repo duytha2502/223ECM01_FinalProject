@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-7 col-12">
                 <div class="product-details-5 pr-70">
+                    <img src="{{ url('storage/'.$product->cover_img) }}" alt="">
                     <img src="{{$product->cover_img}}" alt="">
                 </div>
             </div>

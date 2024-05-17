@@ -75,6 +75,50 @@ body {
   background-color: #f8fafc;
 }
 
+.register-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-block a {
+  font-size: 1rem;
+}
+
+.card-body-recaptcha {
+  position: relative;
+  left: 14%;
+}
+
+.create-shop-block {
+  width: 50%;
+  margin-left: 25%;
+}
+
+.cart-checkout-block {
+  width: 50%;
+  margin-left: 25%;
+}
+
+.block-banner-img{
+  width: 50%;
+  float:left;
+}
+
+div.register {
+  margin-right: -30%;
+}
+
+.login {
+  width: 50%;
+  float: right;
+}
+
+.login-banner-img{
+  width: 110%;
+  margin-left: -10%;
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
@@ -575,11 +619,13 @@ pre code {
 }
 
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  /* width: auto; */
+  /* padding-right: 15px;
+  padding-left: 15px; */
   margin-right: auto;
   margin-left: auto;
+  /* float: right; */
+
 }
 
 @media (min-width: 576px) {
@@ -656,8 +702,8 @@ pre code {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 10%;
+  /* margin-left: -5%; */
 }
 
 .no-gutters {
@@ -1977,7 +2023,7 @@ pre code {
 }
 
 .table {
-  width: 100%;
+  width: 105%;
   margin-bottom: 1rem;
   color: #212529;
 }
@@ -2475,6 +2521,7 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
+  margin-top: 15px;
 }
 
 .form-text {
@@ -2898,6 +2945,7 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #3490dc;
   border-color: #3490dc;
+  width: 100%;
 }
 
 .btn-primary:hover {
@@ -4696,7 +4744,7 @@ input[type=button].btn-block {
 
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
-  border-color: #e9ecef #e9ecef #dee2e6;
+  border-color: #8c8c8c #8c8c8c #8c8c8c;
 }
 
 .nav-tabs .nav-link.disabled {
@@ -4758,7 +4806,8 @@ input[type=button].btn-block {
           align-items: center;
   -webkit-box-pack: justify;
           justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 1rem 0.5rem;
+  margin-top: 1%;
 }
 
 .navbar .container,
@@ -4784,6 +4833,9 @@ input[type=button].btn-block {
   font-size: 1.125rem;
   line-height: inherit;
   white-space: nowrap;
+  position: absolute;
+  left: 10%;
+  top: 10%;
 }
 
 .navbar-brand:hover,
@@ -4800,6 +4852,9 @@ input[type=button].btn-block {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  position: absolute;
+  right: 10%;
+  top: 10%;
 }
 
 .navbar-nav .nav-link {
@@ -5136,12 +5191,12 @@ input[type=button].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 1);
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
@@ -5241,6 +5296,8 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin-right: -15%;
+  padding: 10px;
 }
 
 .card > hr {
@@ -5262,7 +5319,33 @@ input[type=button].btn-block {
   -webkit-box-flex: 1;
           flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  /* padding: 1.25rem; */
+}
+
+.card-body-wel {
+  width: 50%;
+  max-height: fit-content;
+  margin: auto;
+}
+
+.card-body-wel_txt {
+  width: 50%;
+  float: left;
+  max-width: fit-content;
+  margin-top: 5%;
+}
+
+.card-body-wel_img {
+  width: 50%;
+  float: right;
+  margin-top: 3%;
+}
+
+.wel-txt {
+  margin-bottom: 0;
+  margin-left: -10%;
+  font-size: 1.15rem;
+  font-weight: bold;
 }
 
 .card-title {
@@ -5291,6 +5374,13 @@ input[type=button].btn-block {
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  text-align: center;
+}
+
+#card-header-title {    
+  font-weight: bolder;
+  font-size: x-large;
+  color: cornflowerblue;
 }
 
 .card-header:first-child {
@@ -5353,6 +5443,141 @@ input[type=button].btn-block {
 
 .card-deck .card {
   margin-bottom: 15px;
+}
+
+.sign-in-diff_btn {
+  position: relative;
+  display: flex;
+  flex-flow: wrap-reverse;
+  justify-content: space-around;
+}
+
+.sign-in-diff_txt {
+  position: relative;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1rem;
+  margin:0;
+}
+
+
+.google-sign-in-button {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 0px 10px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 14px;
+  background-size: 12%;
+}
+
+.google-sign-in-button:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.google-sign-in-button:active {
+  background-color: #eeeeee;
+}
+
+.google-sign-in-button:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+}
+
+.google-sign-in-button  a{
+  color: #757575;
+}
+
+.facebook-sign-in-button {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 0px 10px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iLTI3Ny4zNzUiIHgyPSItMjc3LjM3NSIgeTE9IjQwNi42MDE4IiB5Mj0iNDA3LjU3MjYiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoNDAgMCAwIC0zOS43Nzc4IDExMTE1LjAwMSAxNjIxMi4zMzQpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDYyZTAiLz4KICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE5YWZmZiIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHBhdGggZmlsbD0idXJsKCNhKSIgZD0iTTE2LjcgMzkuOEM3LjIgMzguMSAwIDI5LjkgMCAyMCAwIDkgOSAwIDIwIDBzMjAgOSAyMCAyMGMwIDkuOS03LjIgMTguMS0xNi43IDE5LjhsLTEuMS0uOWgtNC40bC0xLjEuOXoiLz4KICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJtMjcuOCAyNS42LjktNS42aC01LjN2LTMuOWMwLTEuNi42LTIuOCAzLTIuOEgyOVY4LjJjLTEuNC0uMi0zLS40LTQuNC0uNC00LjYgMC03LjggMi44LTcuOCA3LjhWMjBoLTV2NS42aDV2MTQuMWMxLjEuMiAyLjIuMyAzLjMuMyAxLjEgMCAyLjItLjEgMy4zLS4zVjI1LjZoNC40eiIvPgo8L3N2Zz4=);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 8px 12px;
+  background-size: 12%;
+}
+
+.facebook-sign-in-button:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.facebook-sign-in-button:active {
+  background-color: #eeeeee;
+}
+
+.facebook-sign-in-button:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+}
+
+.github-sign-in-button {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 0px 10px 42px;
+  margin-bottom: 2%;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMiAwIDUuMzAyIDMuNDM4IDkuOCA4LjIwNyAxMS4zODcuNTk5LjExMS43OTMtLjI2MS43OTMtLjU3N3YtMi4yMzRjLTMuMzM4LjcyNi00LjAzMy0xLjQxNi00LjAzMy0xLjQxNi0uNTQ2LTEuMzg3LTEuMzMzLTEuNzU2LTEuMzMzLTEuNzU2LTEuMDg5LS43NDUuMDgzLS43MjkuMDgzLS43MjkgMS4yMDUuMDg0IDEuODM5IDEuMjM3IDEuODM5IDEuMjM3IDEuMDcgMS44MzQgMi44MDcgMS4zMDQgMy40OTIuOTk3LjEwNy0uNzc1LjQxOC0xLjMwNS43NjItMS42MDQtMi42NjUtLjMwNS01LjQ2Ny0xLjMzNC01LjQ2Ny01LjkzMSAwLTEuMzExLjQ2OS0yLjM4MSAxLjIzNi0zLjIyMS0uMTI0LS4zMDMtLjUzNS0xLjUyNC4xMTctMy4xNzYgMCAwIDEuMDA4LS4zMjIgMy4zMDEgMS4yMy45NTctLjI2NiAxLjk4My0uMzk5IDMuMDAzLS40MDQgMS4wMi4wMDUgMi4wNDcuMTM4IDMuMDA2LjQwNCAyLjI5MS0xLjU1MiAzLjI5Ny0xLjIzIDMuMjk3LTEuMjMuNjUzIDEuNjUzLjI0MiAyLjg3NC4xMTggMy4xNzYuNzcuODQgMS4yMzUgMS45MTEgMS4yMzUgMy4yMjEgMCA0LjYwOS0yLjgwNyA1LjYyNC01LjQ3OSA1LjkyMS40My4zNzIuODIzIDEuMTAyLjgyMyAyLjIyMnYzLjI5M2MwIC4zMTkuMTkyLjY5NC44MDEuNTc2IDQuNzY1LTEuNTg5IDguMTk5LTYuMDg2IDguMTk5LTExLjM4NiAwLTYuNjI3LTUuMzczLTEyLTEyLTEyeiIvPjwvc3ZnPg==);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 14px;
+  background-size: 12%;
+}
+
+.github-sign-in-button a {
+  color: black;
+}
+
+.github-sign-in-button:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.github-sign-in-button:active {
+  background-color: #eeeeee;
+}
+
+.github-sign-in-button:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
 }
 
 @media (min-width: 576px) {

@@ -27,7 +27,8 @@ class ProductController extends Controller
         }else{
             $products = Product::take(30)->get();
         }
-
+        $products = Product::paginate(8);
+        // dd($products);
         return view('product.index', compact('products', 'categoryName'));
     }
 
@@ -36,16 +37,45 @@ class ProductController extends Controller
 
         $query = $request->input('query');
 
-        $products = Product::where('name','LIKE',"%$query%")->paginate(10);
+        $products = Product::where('name','LIKE',"%$query%")->paginate(8);
 
         return view('product.catalog',compact('products'));
     }
 
+    public function sortASC(Request $request) {
+
+        $query = $request->input('query');
+
+        $products = Product::orderBy('price', 'ASC')->paginate(8);
+
+        // return view('product.catalog',compact('products'));
+        return view('product.index',compact('products'));
+
+    }
+
+    public function sortDESC(Request $request) {
+
+        $query = $request->input('query');
+
+        $products = Product::orderBy('price', 'DESC')->paginate(8);
+
+        return view('product.index',compact('products'));
+        // return view('product.catalog',compact('products'));
+    }
+
+    public function sortNewest(Request $request) {
+
+        $query = $request->input('query');
+
+        $products = Product::orderBy('updated_at', 'DESC')->paginate(8);
+        
+        return view('product.index',compact('products'));
+        // return view('product.catalog',compact('products'));
+    }
+    
     public function show(Product $product)
     {
-
         return view('product.show', compact('product'));
-
     }
 
 

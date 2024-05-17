@@ -33,11 +33,8 @@ class Category extends ModelsCategory
                 $allProducts = $allProducts->concat($child->products);
 
             }
-
         }
-
         return $allProducts;
-
 
     }
 }

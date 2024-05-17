@@ -14,7 +14,6 @@ class Product extends Model
     protected static function booted()
     {
         static::saving(function ($product) {
-
             $product->product_attributes = json_encode(request('product_attributes'));
         });
     }

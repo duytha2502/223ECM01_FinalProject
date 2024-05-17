@@ -3,9 +3,10 @@
         <div class="product-img-3">
             <a href="{{route('products.show', $product)}}">
                 @if(!empty($product->cover_img))
-                    <img src="{{$product->cover_img}}" alt="">
+                    <img src="{{ url('storage/'.$product->cover_img) }}" alt="">
+                    <img src="{{ $product->cover_img }}" alt="">
                 @else
-                    <img src="/assets/img/product/electro/1.jpg" alt="">
+                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="">
                 @endif
             </a>
             <div class="product-action-right">
@@ -29,7 +30,7 @@
                 <i class="icofont icofont-star"></i>
             </div>
             <h4><a href="{{route('products.show', $product)}}">{{$product->name}}</a></h4>
-            <span>{{$product->description}}</span>
+            <div>{{$product->description}}</div>
             <h5>$ {{$product->price}}</h5>
         <p>{{$product->shop->owner->name ?? 'n/a'}}</p>
         </div>
