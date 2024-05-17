@@ -43,4 +43,9 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     {
         return $this->hasOne(Shop::class, 'user_id');
     }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class, 'user_id');
+    }
 }

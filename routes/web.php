@@ -22,7 +22,7 @@ Route::redirect('/', '/home');
 
 Route::get('test', function(){
     $provider = PayPal::setProvider();
-    dd($provider);    
+    dd($provider);
 });
 
 Auth::routes([

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\Review;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -68,15 +72,29 @@ class ProductController extends Controller
         $query = $request->input('query');
 
         $products = Product::orderBy('updated_at', 'DESC')->paginate(8);
-        
+
         return view('product.index',compact('products'));
         // return view('product.catalog',compact('products'));
     }
-    
-    public function show(Product $product)
+
+    public function show(Product $product, Review $review)
     {
-        return view('product.show', compact('product'));
+        // $user = DB::table('users')->get();
+        // $review = Review::where('booking_id', '=', $product->id)
+        // ->get();
+        $review = DB::table('review_ratings')->join('users', 'review_ratings.user_id', '=', 'users.id')
+        ->get();
+
+        return view('product.show', compact('product', 'review'));
     }
 
-
+    public function store(Request $request){
+        $review = new Review();
+        $review->comments= $request->comment;
+        $review->booking_id = $request->booking_id;
+        $review->star_rating = $request->rating;
+        $review->user_id = Auth::user()->id;
+        $review->save();
+        return redirect()->back()->with('flash_msg_success','Your review has been submitted Successfully,');
+    }
 }

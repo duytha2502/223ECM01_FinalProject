@@ -3,12 +3,12 @@
 
 @section('content')
 
-    <h4>Your Orders</h4>
+    <h4>Your Pre-orders</h4>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Order number</th>
+                <th>Pre-order number</th>
                 <th>Status</th>
                 <th>Item count</th>
                 <th>Totals</th>
@@ -24,7 +24,7 @@
                     </td>
                     <td>
                         {{$Order->status}}
-                        
+
                         @if($Order->status != 'completed' & $Order->status != 'pending')
                             <a href=" {{route('customers.orders.delivered', $Order)}} " class="btn btn-primary btn-sm" style="width: fit-content">mark completed</button>
                         @endif
@@ -41,7 +41,7 @@
                     <td>
                         {{ $Order->payment_method }}
                     </td>
-                    
+
                     <td>
                         <a name="" id="" class="btn btn-primary btn-sm" href="{{ url('customers/orders/index/'.$Order->id) }}" role="button">View</a>
                     </td>
