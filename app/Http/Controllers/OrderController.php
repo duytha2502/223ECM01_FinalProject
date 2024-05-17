@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\MonitorOrder;
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -29,7 +30,7 @@ class OrderController extends Controller
 
         $order = new Order();
 
-        $order->order_number = uniqid('OrderNumber-');
+        $order->order_number = uniqid('PreOrderNumber-');
 
         $order->shipping_fullname = $request->input('shipping_fullname');
         $order->shipping_state = $request->input('shipping_state');
@@ -37,6 +38,7 @@ class OrderController extends Controller
         $order->shipping_address = $request->input('shipping_address');
         $order->shipping_phone = $request->input('shipping_phone');
         $order->shipping_zipcode = $request->input('shipping_zipcode');
+        $order->payment_option = $request->input('payment_option');
 
         if(!$request->has('billing_fullname')) {
             $order->billing_fullname = $request->input('shipping_fullname');
@@ -45,6 +47,7 @@ class OrderController extends Controller
             $order->billing_address = $request->input('shipping_address');
             $order->billing_phone = $request->input('shipping_phone');
             $order->billing_zipcode = $request->input('shipping_zipcode');
+            $order->payment_option = $request->input('payment_option');
         }else {
             $order->billing_fullname = $request->input('billing_fullname');
             $order->billing_state = $request->input('billing_state');
@@ -52,6 +55,7 @@ class OrderController extends Controller
             $order->billing_address = $request->input('billing_address');
             $order->billing_phone = $request->input('billing_phone');
             $order->billing_zipcode = $request->input('billing_zipcode');
+            $order->payment_option = $request->input('payment_option');
         }
 
 
@@ -59,7 +63,6 @@ class OrderController extends Controller
         $order->item_count = \Cart::session(auth()->id())->getContent()->count();
 
         $order->user_id = auth()->id();
-
         if (request('payment_method') == 'paypal') {
             $order->payment_method = 'paypal';
         }
@@ -70,10 +73,11 @@ class OrderController extends Controller
 
         foreach($cartItems as $item) {
             $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity]);
+            $product = Product::find($item->id);
+            $product->current_buyer_quantity = $product->current_buyer_quantity + 1;
+            $product->update();
         }
-
         $order->generateSubOrders();
-
         if (request('payment_method') == 'paypal') {
 
             MonitorOrder::dispatch($order)->delay(now()->addMinutes(1));

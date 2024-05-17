@@ -19,6 +19,8 @@ class CartController extends Controller
             'description'=> $product->description,
             'cover_img' => $product->cover_img,
             'price' => $product->price,
+            'buyer_quantity' => $product->buyer_quantity,
+            'current_buyer_quantity' => $product->current_buyer_quantity,
             'quantity' => 1,
             'attributes' => array(),
             'associatedModel' => $product
@@ -38,7 +40,7 @@ class CartController extends Controller
     {
 
        \Cart::session(auth()->id())->remove($itemId);
-       
+
         return back();
     }
 
@@ -57,7 +59,8 @@ class CartController extends Controller
 
     public function checkout()
     {
-        return view('cart.checkout');
+        $cartItems = \Cart::session(auth()->id())->getContent();
+        return view('cart.checkout',compact('cartItems'));
     }
 
     // public function clearCoupon(Request $request)
