@@ -6,7 +6,7 @@
 @csrf
 <div class="d-flex flex-row">
     <div class="col-md-8 col-lg-8 mr-4">
-        <h2>Checkout</h2>
+        <h2>Pre-order Checkout</h2>
         <h3>Shipping Information</h3>
             <div class="form-group">
                 <label for="">Full Name</label>
@@ -38,9 +38,9 @@
                 <input type="text" name="shipping_phone" id="" class="form-control">
             </div>
 
-            <h4>Payment option</h4>
+            <h4>Payment Method</h4>
 
-            <div class="form-check">
+            {{-- <div class="form-check">
                 <label class="form-check-label">
                     <input type="radio" checked class="form-check-input" name="payment_method" id=""
                         value="cash_on_delivery">
@@ -48,20 +48,18 @@
 
                 </label>
 
-            </div>
+            </div> --}}
 
-            <div class="form-check">
+            <div class="form-check" style="font-size: 16px">
                 <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="payment_method" id="" value="paypal">
+                    <input type="radio" checked class="form-check-input" name="payment_method" id="" value="paypal">
                     Paypal
-
                 </label>
 
             </div>
     </div>
     <div class="col-md-4 col-lg-4 ml-4">
-        <h2>Checkout</h2>
-        <h3>Pre-Order Information</h3>
+        <h2>Pre-Order Information</h2>
             @foreach($cartItems as $item)
             <div class="d-flex align-items-center justify-content-center mt-4">
                 <div class="col-md-4 col-lg-4 col-4">
@@ -69,41 +67,33 @@
                     <img style="width: 100%" src="{{ url('storage/'.$item['associatedModel']['cover_img']) }}" alt="">
                 </div>
                 <div class="col-md-8 col-lg-8 col-8">
-                    <p style="font-weight: 700">{{ $item->name }}</p>
-                    <p>{{ $item->price }} $ x {{ $item->quantity }} </p>
+                    <h5 style="font-weight: 700">{{ $item->name }}</h5>
+                    <p>{{ $item['associatedModel']['final_price'] }} $ x {{ $item['quantity'] }} </p>
                 </div>
             </div>
             <div class="d-flex align-items-between justify-content-between">
-                <div class="col-md-4 col-lg-4 col-4">
-                    <label style="font-weight: 700" for="">Subtotal</label>
-                    <label style="font-weight: 700" for="">Shipping</label>
-                    <label style="font-weight: 700" for="">Total</label>
+                <div class="col-md-4 col-lg-4 col-4 mt-2">
+                    <p style="font-weight: 700">Price</p>
+                    <p style="font-weight: 700">Quantity</p>
+                    <p style="font-weight: 700">Total</p>
+                    <p style="font-weight: 700">Payment</p>
                 </div>
-                <div class="col-md-4 col-lg-4 col-4">
-                    <p style="font-weight: 700">{{ ($item->price * $item->quantity)}} $</p>
-                    <label for="">0 $</label>
-                    <p style="font-weight: 700">{{ ($item->price * $item->quantity)}} $</p>
+                <div class="col-md-4 col-lg-4 col-4 mt-2">
+                    <p style="font-weight: 700">{{$item['associatedModel']['final_price']}} $</p>
+                    <p style="font-weight: 700">{{$item->quantity}}</p>
+                    <p style="font-weight: 700">{{$item['associatedModel']['final_price'] * $item['quantity']}} $</p>
+                    <p style="font-weight: 700">{{($item['associatedModel']['final_price'] * $item['quantity'])/2}} $ (50%)</p>
                 </div>
             </div>
             @endforeach
 
             <h4>Payment option</h4>
-
-            <div class="form-check mt-4">
+            <div class="form-check mt-4" style="font-size: 16px">
                 <label style="font-weight: 700" class="form-check-label">
                     <input type="radio" checked class="form-check-input" name="payment_option" id=""
                         value="50%pay">
-                    50% Payment (50% will be paid upon receipt)
+                    50% payment (50% deposit, remaining 50% will be paid upon delivery)
                 </label>
-                <p style="color: rgb(96, 96, 96)">50% pre payment: {{ ($item->price * $item->quantity)/2 }} $</p>
-            </div>
-            <div class="form-check">
-                <label style="font-weight: 700" class="form-check-label">
-                    <input type="radio" checked class="form-check-input" name="payment_option" id=""
-                        value="100%pay">
-                    100% Payment
-                </label>
-                <p style="color: rgb(96, 96, 96)">100% pre payment: {{ ($item->price * $item->quantity) }} $</p>
             </div>
             {{-- <div class="form-check">
                 <label class="form-check-label">

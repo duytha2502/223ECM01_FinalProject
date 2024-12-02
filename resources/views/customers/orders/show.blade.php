@@ -41,22 +41,32 @@
         </thead>
         @foreach ($order->orderItems as $orderItem)
         <tbody>
-                <td width="5%   ">{{ $orderItem->id }}</td>
+                <td width="5%">{{ $orderItem->id }}</td>
                 <td width="10%">
-                    <img style="width: 50%" src="{{ $orderItem->product->cover_img }}" >
+                    @if(!is_null(URL::asset('storage/'.$orderItem->product->cover_img)))
+                        <img style="width: 50%" src="{{ URL::asset('storage/'.$orderItem->product->cover_img) }}" >
+                    @else
+                        <img style="width: 50%" src="{{ $orderItem->product->cover_img }}" >
+                    @endif
                 </td>
                 <td width="10%">{{ $orderItem->product->name }}</td>
-                <td width="10%">${{ $orderItem->product->price }}</td>
+                <td width="10%">$ {{ $orderItem->product->final_price }}</td>
                 <td width="10%">{{ $orderItem->quantity }}</td>
-                <td width="10%" style="font-weight:bold">${{ $orderItem->quantity * $orderItem->product->price}}</td>
+                <td width="10%" style="font-weight:bold">$ {{ $orderItem->quantity * $orderItem->product->final_price}}</td>
             @endforeach
             <tr>
-                <td colspan="5" style="font-weight:bold">Coupon</td>
-                <td colspan="1" style="font-weight:bold"></td>
+                <td colspan="5" style="font-weight:bold">Paid</td>
+                <td colspan="1" style="font-weight:bold">$ {{ $order->grand_total }}</td>
+            </tr>
+            <tr>
+                <td colspan="5" style="font-weight:bold">Payment on delivery </td>
+                <td colspan="1" style="font-weight:bold">
+                    $ {{ ($orderItem->quantity * $orderItem->product->final_price) - $order->grand_total}}
+                </td>
             </tr>
             <tr>
                 <td colspan="5" style="font-weight:bold">Total Amount</td>
-                <td colspan="1" style="font-weight:bold">${{ $order->grand_total }}</td>
+                <td colspan="1" style="font-weight:bold">$ {{ $orderItem->quantity * $orderItem->product->final_price}}</td>
             </tr>
         </tbody>
     </table>

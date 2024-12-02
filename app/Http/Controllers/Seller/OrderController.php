@@ -15,7 +15,7 @@ class OrderController extends Controller
     {
 
         $orders = SubOrder::where('seller_id', auth()->id())->get();
-
+        // dd($orders);
         return view('sellers.orders.index', compact('orders'));
 
     }

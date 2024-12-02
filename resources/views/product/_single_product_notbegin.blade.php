@@ -13,9 +13,6 @@
                     <a class="animate-right" href="{{route('products.show', $product)}}" title="View">
                         <i class="pe-7s-look"></i>
                     </a>
-                    <a class="animate-top" title="Add To Cart" href="{{route('cart.add', $product->id)}}">
-                        <i class="pe-7s-cart"></i>
-                    </a>
                     <a class="animate-left" title="Wishlist" href="#">
                         <i class="pe-7s-like"></i>
                     </a>
@@ -23,13 +20,18 @@
             </div>
             <div class="product-content-4 text-center">
                 <h4><a href="{{route('products.show', $product)}}">{{$product->name}}</a></h4>
-                <div>{!!$product->description!!}</div>
+                <div>{{ $product->description }}</div>
                 <div class="mt-2">
                     <h7>Begin from: {{ $product->begin_date }}</h7>
                     <h7> To {{ $product->expire_date }}</h7>
                 </div>
                 <h5 class="mt-2">$ {{$product->final_price}}</h5>
-            <p>{{$product->shop->owner->name ?? 'n/a'}}</p>
+                <p>{{$product->shop->owner->name ?? 'n/a'}}</p>
+                <div class=" d-flex justify-content-center align-item-center">
+                    <div class="alert alert-primary" style="width:fit-content" role="alert">
+                        Comming soon
+                    </div>
+                </div>
             </div>
         </div>
 </div>

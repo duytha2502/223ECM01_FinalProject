@@ -6,7 +6,12 @@ use App\Product;
 
 use Illuminate\Http\Request;
 use App\Category;
-use Illuminate\Support\Facades\Artisan;
+use App\Order;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
 {
@@ -17,7 +22,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -31,14 +36,50 @@ class HomeController extends Controller
         $products = Product::with('shop.owner')->take(30)->get();
 
         $categories = Category::with('children.children')->whereNull('parent_id')->get();
-        
-        $products = Product::paginate(12);
 
-        return view('home', ['allProducts' => $products,'categories'=>$categories]);
+        $products = Product::orderBy('created_at', 'DESC')->paginate(12);
+
+        $order = Order::where('user_id', Auth::user()->id)
+                ->join('order_items','orders.id', '=', 'order_items.order_id')
+                ->get();
+        // dd(($order));
+        return view('home', ['allProducts' => $products,'categories'=>$categories], compact('order'));
     }
 
     public function contact()
     {
-        return view('contact');
+        return view('profile', ['user' => Auth::user()]);
     }
+
+    public function updateContact(Request $request)
+    {
+        // Get current user
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        // Validate the data submitted by user
+        $validator = Validator::make($request->all(), [
+            'name' => 'max:255',
+            'email' => 'email|max:225|'. Rule::unique('users')->ignore($user->id),
+        ]);
+
+        // if fails redirects back with errors
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Fill user model
+        $user->fill([
+            'name' => $request->name,
+            'email' => $request->email
+        ]);
+
+        // Save user to database
+        $user->save();
+
+        return back()->withMessage('Information changed successfully!');
+    }
+
 }

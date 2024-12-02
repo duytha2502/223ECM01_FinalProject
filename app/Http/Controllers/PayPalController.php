@@ -29,7 +29,11 @@ class PayPalController extends Controller
         }
 
         $order = Order::find($orderId);
-        $order->paypal_orderid = $response->result->id;
+        if (isset($response->result) && is_object($response->result)) {
+            $order->paypal_orderid = $response->result->id;
+        } else {
+            echo "Error: Expected type 'object'. Found 'array|string'";
+        }
         $order->save();
 
         foreach ($response->result->links as $link) {
@@ -40,11 +44,9 @@ class PayPalController extends Controller
 
     }
 
-
-
     public function cancelPage()
     {
-        dd('payment failed');
+        return redirect()->route('cart.checkout');
     }
 
 

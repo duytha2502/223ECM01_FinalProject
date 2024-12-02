@@ -8,6 +8,15 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/public/assets/img/logo/android-icon-96x96.png">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8J27P94BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-M8J27P94BQ');
+    </script>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/android-icon-96x96.png">
 
@@ -42,7 +51,7 @@
                 <div class="header-contact-info">
                     <ul>
                         <li><i class="pe-7s-call"></i> +0788024737</li>
-                        <li><i class="pe-7s-mail"></i> <a href="#">darkteam@gmail.com</a></li>
+                        <li><i class="pe-7s-mail"></i> <a href="#">223ECM01@gmail.com</a></li>
                     </ul>
                     <ul class="navbar-nav mr-auto">
 
@@ -59,7 +68,7 @@
                             <a class="nav-link" href="{{ route('seller.orders.index') }}">Your Shop</a>
                         </li>
                         @endif
-                        <li><a href="#"><i class="pe-7s-users"></i>{{ Auth::user()->name }}</a></li>
+                        <li><a href="{{ route('contact') }}"><i class="pe-7s-users"></i>{{ Auth::user()->name }}</a></li>
                         {{-- <li><a data-toggle="modal" data-target="#exampleCompare" href="#"><i
                                     class="pe-7s-repeat"></i>Compare</a></li>
                         <li><a href="wishlist.html"><i class="pe-7s-like"></i>Wishlist</a></li> --}}
@@ -108,7 +117,7 @@
                             <a href=""><i class="pe-7s-plane"></i></a>
                         </div>
                         <div class="same-style-text">
-                                <a href="{{ route('customer.order') }}">Product <br>trace</a>
+                                <a href="{{ route('customer.order') }}">Pre-order <br>trace</a>
                             </div>
                         </div>
                     </form>
@@ -137,7 +146,7 @@
                                 <li><a href="#">BLOG</a>
 
                                 </li>
-                                <li><a href="#"> Contact </a></li>
+                                <li><a href="{{route('contact')}}"> Contact </a></li>
                             </ul>
                         </nav>
                     </div>
@@ -164,7 +173,7 @@
 
 
     @yield('content')
-    
+
     <br>
     <br>
     <footer class="footer-area">

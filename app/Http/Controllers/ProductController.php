@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\Order;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
@@ -32,8 +33,12 @@ class ProductController extends Controller
             $products = Product::take(30)->get();
         }
         $products = Product::paginate(8);
+
+        $order = Order::where('user_id', Auth::user()->id)
+        ->join('order_items','orders.id', '=', 'order_items.order_id')
+        ->get();
         // dd($products);
-        return view('product.index', compact('products', 'categoryName'));
+        return view('product.index', compact('products', 'categoryName','order'));
     }
 
     public function search(Request $request)
@@ -43,17 +48,24 @@ class ProductController extends Controller
 
         $products = Product::where('name','LIKE',"%$query%")->paginate(8);
 
-        return view('product.catalog',compact('products'));
+        $order = Order::where('user_id', Auth::user()->id)
+                ->join('order_items','orders.id', '=', 'order_items.order_id')
+                ->get();
+        return view('product.catalog',compact('products', 'order'));
     }
 
     public function sortASC(Request $request) {
 
         $query = $request->input('query');
 
-        $products = Product::orderBy('price', 'ASC')->paginate(8);
+        $products = Product::orderBy('final_price', 'ASC')->paginate(8);
+
+        $order = Order::where('user_id', Auth::user()->id)
+                ->join('order_items','orders.id', '=', 'order_items.order_id')
+                ->get();
 
         // return view('product.catalog',compact('products'));
-        return view('product.index',compact('products'));
+        return view('product.index',compact('products', 'order'));
 
     }
 
@@ -61,9 +73,13 @@ class ProductController extends Controller
 
         $query = $request->input('query');
 
-        $products = Product::orderBy('price', 'DESC')->paginate(8);
+        $products = Product::orderBy('final_price', 'DESC')->paginate(8);
 
-        return view('product.index',compact('products'));
+        $order = Order::where('user_id', Auth::user()->id)
+                ->join('order_items','orders.id', '=', 'order_items.order_id')
+                ->get();
+
+        return view('product.index',compact('products', 'order'));
         // return view('product.catalog',compact('products'));
     }
 
@@ -73,7 +89,11 @@ class ProductController extends Controller
 
         $products = Product::orderBy('updated_at', 'DESC')->paginate(8);
 
-        return view('product.index',compact('products'));
+        $order = Order::where('user_id', Auth::user()->id)
+                ->join('order_items','orders.id', '=', 'order_items.order_id')
+                ->get();
+
+        return view('product.index',compact('products', 'order'));
         // return view('product.catalog',compact('products'));
     }
 
@@ -82,10 +102,19 @@ class ProductController extends Controller
         // $user = DB::table('users')->get();
         // $review = Review::where('booking_id', '=', $product->id)
         // ->get();
-        $review = DB::table('review_ratings')->join('users', 'review_ratings.user_id', '=', 'users.id')
-        ->get();
+        $order = Order::where('user_id', Auth::user()->id)
+                ->join('order_items','orders.id', '=', 'order_items.order_id')
+                ->get();
 
-        return view('product.show', compact('product', 'review'));
+        $review = DB::table('review')
+        ->where('booking_id', '=', $product->id)
+        ->join('users', 'review.user_id', '=', 'users.id')
+        ->get();
+        // dd($order);
+
+        $ratings = DB::table('review')->where('booking_id', '=', $product->id)->avg('star_rating');
+        // dd($ratings);
+        return view('product.show', compact('product', 'review', 'order', 'ratings'));
     }
 
     public function store(Request $request){

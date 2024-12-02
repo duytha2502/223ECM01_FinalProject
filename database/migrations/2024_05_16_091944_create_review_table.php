@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class CreateReviewRatingsTable extends Migration
+class CreateReviewTable extends Migration
 {
     /**
      * Run the migrations.
@@ -11,12 +11,12 @@ class CreateReviewRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('review_ratings', function (Blueprint $table) {
+        Schema::create('review', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('booking_id');
             $table->longText('comments')->nullable();
             $table->integer('star_rating');
-            $table->enum('status', ['active', 'deactive']);
             $table->timestamps();
         });
     }

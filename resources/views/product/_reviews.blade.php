@@ -137,7 +137,10 @@
             <div class="form-group row">
                 <div class="d-flex justify-content-start align-item-start">
                     <img width="8%" src="{{ $item->avatar }}" alt="">
-                    <p class="mb-0 mt-2 mr-2" style="font-weight: 700">{{ $item->name }}</p>
+                    <div class="d-flex justify-content-center align-item-center flex-column">
+                        <p class="mb-0 mt-2 mr-2 ml-2" style="font-weight: 700">{{ $item->name }}</p>
+                        <p class="mb-0 mt-2 mr-2 ml-2">{{ $item->created_at }}</p>
+                    </div>
                     <div class="rated">
                         @for($i=1; $i<=$item->star_rating; $i++)
                             <input type="radio" id="star{{$i}}" class="rate" name="rating" value="5" />

@@ -19,6 +19,7 @@ class CartController extends Controller
             'description'=> $product->description,
             'cover_img' => $product->cover_img,
             'price' => $product->price,
+            'final_price' => $product->final_price,
             'buyer_quantity' => $product->buyer_quantity,
             'current_buyer_quantity' => $product->current_buyer_quantity,
             'quantity' => 1,
@@ -26,13 +27,13 @@ class CartController extends Controller
             'associatedModel' => $product
         ));
         return redirect()->route('cart.index');
-
     }
 
     public function index(Product $product)
     {
 
         $cartItems = \Cart::session(auth()->id())->getContent();
+        // dd($cartItems['associatedModel']);
         return view('cart.index', compact('cartItems'));
     }
 
@@ -60,6 +61,7 @@ class CartController extends Controller
     public function checkout()
     {
         $cartItems = \Cart::session(auth()->id())->getContent();
+
         return view('cart.checkout',compact('cartItems'));
     }
 

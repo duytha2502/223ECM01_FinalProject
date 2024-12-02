@@ -11,7 +11,7 @@
                 <th>Pre-order number</th>
                 <th>Status</th>
                 <th>Item count</th>
-                <th>Totals</th>
+                {{-- <th>Totals</th> --}}
                 <th>Payment method</th>
             </tr>
         </thead>
@@ -25,18 +25,18 @@
                     <td>
                         {{$Order->status}}
 
-                        @if($Order->status != 'completed' & $Order->status != 'pending')
-                            <a href=" {{route('customers.orders.delivered', $Order)}} " class="btn btn-primary btn-sm" style="width: fit-content">mark completed</button>
-                        @endif
+                        {{-- @if($Order->status != 'completed' & $Order->status != 'pending')
+                            <a href="{{route('customer.order.delivered', $Order)}}" class="btn btn-primary btn-sm" style="width: fit-content">mark completed</button>
+                        @endif --}}
                     </td>
 
                     <td>
                         {{$Order->item_count}}
                     </td>
 
-                    <td>
+                    {{-- <td>
                        {{ $Order->grand_total }}
-                    </td>
+                    </td> --}}
 
                     <td>
                         {{ $Order->payment_method }}
