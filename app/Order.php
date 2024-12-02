@@ -23,7 +23,7 @@ class Order extends Model
 
     public function items()
     {
-        return $this->belongsToMany(Product::class, 'order_items', 'order_id', 'product_id')->withPivot('quantity', 'price');
+        return $this->belongsToMany(Product::class, 'order_items', 'order_id', 'product_id')->withPivot('quantity', 'price', 'final_price');
     }
 
     public function user()
@@ -55,16 +55,15 @@ class Order extends Model
         foreach($orderItems->groupBy('shop_id') as $shopId => $products) {
 
             $shop = Shop::find($shopId);
-
+            // dd($products);
             $suborder = $this->subOrders()->create([
                 'order_id'=> $this->id,
                 'seller_id'=> $shop->user_id ?? 1,
-                'grand_total'=> $products->sum('pivot.price'),
+                'grand_total'=> $products->sum('final_price'),
                 'item_count'=> $products->count(),
             ]);
-
             foreach($products as $product) {
-                $suborder->items()->attach($product->id, ['price' => $product->pivot->price, 'quantity' => $product->pivot->quantity]);
+                $suborder->items()->attach($product->id, ['price' => $product->pivot->price, 'quantity' => $product->pivot->quantity, 'final_price' => $product->final_price]);
             }
 
         }

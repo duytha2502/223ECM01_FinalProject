@@ -24,6 +24,15 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/android-icon-96x96.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8J27P94BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-M8J27P94BQ');
+    </script>
 </head>
 
 <body>

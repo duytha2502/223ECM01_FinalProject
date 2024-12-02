@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\GithubController;
+use App\Http\Controllers\UserController;
 use Srmklive\PayPal\Facades\PayPal;
 // use App\Http\Controllers\FacebookController;
 
@@ -31,7 +32,12 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::post('/contact/update', 'HomeController@updateContact')->name('contact.update');
 
+Route::get('/contact/password', 'ChangePasswordController@show')->name('contact.password');
+Route::post('/contact/password/update', 'ChangePasswordController@update')->name('contact.password.update');
+// User account routes
+// Route::get('/profile', 'HomeController@showProfile')->name('profile');
 
 Route::get('/products/search', 'ProductController@search')->name('products.search');
 Route::get('/products/sortASC', 'ProductController@sortASC')->name('products.sortASC');
@@ -62,7 +68,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/order/pay/{suborder}', 'SubOrderController@pay')->name('order.pay');
 });
 
-
 Route::group(['prefix' => 'seller', 'middleware' => 'auth', 'as' => 'seller.', 'namespace' => 'Seller'], function () {
 
     Route::redirect('/','seller/orders');
@@ -72,11 +77,16 @@ Route::group(['prefix' => 'seller', 'middleware' => 'auth', 'as' => 'seller.', '
     Route::get('/orders/delivered/{suborder}',  'OrderController@markDelivered')->name('order.delivered');
 });
 
+Route::group(['prefix' => 'customer', 'middleware' => 'auth', 'as' => 'customer.'], function () {
+
+    Route::get('/orders/delivered/{suborder}',  'CustomerOrderController@markCompleted')->name('order.delivered');
+});
+
 Route::get('customers/orders/index', [CustomerOrderController::class,'index'])->name('customer.order');
 Route::get('customers/orders/index/{orderId}', [CustomerOrderController::class,'show']);
 // Route::get('customers/orders/index/destroy/{orderId}', [CustomerOrderController::class,'destroy'])->name('customer.destroy');
-// Route::get('customers/orders/index/delivered/{suborder}',  'CustomerOrderController@markDelivered')->name('customers.orders.delivered');
-Route::get('customers/orders/index/delivered/{suborder}', [CustomerOrderController::class,'markCompleted'])->name('customers.orders.delivered');
+// Route::get('customers/orders/index/delivered/{suborder}',  'CustomerOrderController@markCompleted')->name('customers.orders.delivered');
+// Route::get('customers/orders/delivered/{suborder}', [CustomerOrderController::class,'markCompleted'])->name('customers.orders.delivered');
 
 
 //Google login URL

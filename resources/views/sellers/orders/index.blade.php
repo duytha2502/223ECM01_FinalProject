@@ -30,7 +30,7 @@
                     <td>
                         {!! $subOrder->order->billing_phone!!}
                     </td>
-                    
+
                     <td>
                         {!! $subOrder->order->shipping_address !!}
                         {{-- {{ $subOrder->order->user_id }} --}}
@@ -43,8 +43,8 @@
 
                         {{$subOrder->status}}
 
-                        @if($subOrder->status != 'processing' & $subOrder->status != 'completed') 
-                        <a href=" {{route('seller.order.delivered', $subOrder)}} " class="btn btn-primary btn-sm" style="width: fit-content">mark processing</button>
+                        @if($subOrder->status != 'processing' & $subOrder->status != 'completed')
+                            <a href=" {{route('seller.order.delivered', $subOrder)}} " class="btn btn-primary btn-sm" style="width: fit-content">Mark processing</button>
                         @endif
                     </td>
                     <td>

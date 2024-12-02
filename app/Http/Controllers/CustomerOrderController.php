@@ -17,7 +17,7 @@ class CustomerOrderController extends Controller
 
         $orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
-        // dd($items);
+        // dd($orders);
         return view('customers.orders.index', compact('orders'));
 
     }
@@ -44,14 +44,13 @@ class CustomerOrderController extends Controller
     {
         $suborder->status = 'completed';
         $suborder->save();
-
         //check if all suborders complete
         $pendingSubOrders = $suborder->order->subOrders()->where('status','!=', 'completed')->count();
-
+        
         if($pendingSubOrders == 0) {
             $suborder->order()->update(['status'=>'completed']);
         }
 
-        return redirect('/customers/orders/index')->withMessage('Order marked completed');
+        return redirect('/customers/orders')->withMessage('Order marked completed');
     }
 }

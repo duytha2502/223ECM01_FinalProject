@@ -58,10 +58,10 @@ class OrderController extends Controller
             $order->payment_option = $request->input('payment_option');
         }
 
+        $cartItems = \Cart::session(auth()->id())->getContent();
 
-        $order->grand_total = \Cart::session(auth()->id())->getTotal();
         $order->item_count = \Cart::session(auth()->id())->getContent()->count();
-
+;
         $order->user_id = auth()->id();
         if (request('payment_method') == 'paypal') {
             $order->payment_method = 'paypal';
@@ -69,15 +69,16 @@ class OrderController extends Controller
 
         $order->save();
 
-        $cartItems = \Cart::session(auth()->id())->getContent();
-
         foreach($cartItems as $item) {
-            $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity]);
+            $order->items()->attach($item->id, ['final_price'=> $item->final_price, 'quantity'=> $item->quantity]);
+            $order->grand_total = $item['associatedModel']['final_price'] * $item['quantity'] /2;
             $product = Product::find($item->id);
             $product->current_buyer_quantity = $product->current_buyer_quantity + 1;
             $product->update();
+            $order->update();
         }
         $order->generateSubOrders();
+
         if (request('payment_method') == 'paypal') {
 
             MonitorOrder::dispatch($order)->delay(now()->addMinutes(1));
@@ -85,6 +86,7 @@ class OrderController extends Controller
             return redirect()->route('paypal.checkout', $order->id);
 
         }
+        dd($order->grand_total);
 
         \Cart::session(auth()->id())->clear();
 

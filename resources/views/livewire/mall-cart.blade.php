@@ -31,11 +31,14 @@
                                     <td class="product-thumbnail"><a href="#"></a>
                                         <img style="width: 100%" src="{{ $item['associatedModel']['cover_img'] }}" alt="">
                                         <img style="width: 100%" src="{{ url('storage/'.$item['associatedModel']['cover_img']) }}" alt="">
-                                    </td> 
-                                    
+                                    </td>
+
                                     <td class="product-name"><a href="#">{{ $item['name'] }} </a></td>
-                                    <td class="product-price-cart"><span
+                                    {{-- <td class="product-price-cart"><span
                                             class="amount">${{Cart::session(auth()->id())->get($item['id'])->getPriceSum()}}</span>
+                                    </td> --}}
+                                    <td class="product-price-cart"><span
+                                        class="amount">$ {{ $item['associatedModel']['final_price'] }}</span>
                                     </td>
                                     <td class="product-quantity">
                                         <livewire:cart-update-form :item="$item" :key="$item['id']" />
@@ -45,7 +48,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="coupon-all">
                                 <div class="coupon">
@@ -54,22 +57,24 @@
                                             placeholder="Coupon code" type="text" required>
                                         <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                     </form>
-                                    {{-- <form action="{{route('cart.clearCoupon')}}" method='get'>
+                                    <form action="{{route('cart.clearCoupon')}}" method='get'>
                                     <input class="button" name="apply_coupon" value="Clear coupon" type="submit">
-                                    </form> --}}
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
                                 <h2>Cart totals</h2>
                                 <ul>
-                                    <li>SubTotal<span>{{\Cart::session(auth()->id())->getSubTotal()}}</span></li>
-                                    <li>Total<span>{{\Cart::session(auth()->id())->getTotal()}}</span></li>
+                                    <li>SubTotal<span>{{ $item['associatedModel']['final_price'] * $item['quantity']}} </span></li>
+                                    {{-- <li>SubTotal<span>{{\Cart::session(auth()->id())->getSubTotal()}}</span></li> --}}
+                                    <li>Total<span>{{ $item['associatedModel']['final_price'] * $item['quantity']}}</span></li>
+                                    {{-- <li>Total<span>{{\Cart::session(auth()->id())->getTotal()}}</span></li> --}}
                                 </ul>
-                                <a href="{{route('cart.checkout')}}">Proceed to checkout</a>
+                                <a href="{{route('cart.checkout')}}">Proceed to pre-order checkout</a>
                             </div>
                         </div>
                     </div>

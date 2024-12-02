@@ -13,17 +13,17 @@ class GoogleController extends Controller
 
     public function callbackGoogle() {
 
-        try {      
+        try {
             $google_user = Socialite::driver("google")->user();
 
-            $user = User::where('provider_id', $google_user->id)->first();
-            
+            $user = User::where('google_id', $google_user->id)->first();
+
         if (!$user) {
             $data = [
                 'role_id' => 2,
-                'provider_id' => $google_user->id,
+                'google_id' => $google_user->id,
                 'name' => $google_user->name,
-                'email' => $google_user->id . $google_user->email,
+                'email' => $google_user->email,
             ];
 
             $userConnected = User::create($data);
@@ -34,7 +34,7 @@ class GoogleController extends Controller
             auth()->login($user);
             return redirect()->route('home');
         } catch (\Throwable $th) {
-            // dd('sth went wrong', $th->getMessage());
+            dd('sth went wrong', $th->getMessage());
             return redirect()->route('login');
         }
     }
